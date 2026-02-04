@@ -7,12 +7,23 @@ using System.Text;
 
 namespace PrintTracker.Wpf.ViewModel
 {
-    internal class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase
     {
         public ObservableCollection<PrintProject> PrintProjects { get; } = new();
 
+        private PrintProject? _selectedProject;
+        public PrintProject? SelectedProject
+        {
+            get => _selectedProject;
+            set => SetProperty(ref _selectedProject, value);
+        }
 
         public MainViewModel()
+        {
+            LoadTestData();
+        }
+
+        private void LoadTestData()
         {
             // Beispielhafte Daten zum Testen
             PrintProjects.Add(new PrintProject
@@ -26,6 +37,7 @@ namespace PrintTracker.Wpf.ViewModel
                 PrintDurationHours = TimeSpan.FromHours(5),
                 ElectricityPrice = 1.50m
             });
+
             PrintProjects.Add(new PrintProject
             {
                 Name = "Testprojekt 2",
@@ -35,6 +47,18 @@ namespace PrintTracker.Wpf.ViewModel
                 PrinterUsed = "Ender 3 Pro",
                 FilamentUsed = "PETG - Blau",
                 PrintDurationHours = TimeSpan.FromHours(3.5),
+                ElectricityPrice = 1.00m
+            });
+
+            PrintProjects.Add(new PrintProject
+            {
+                Name = "Testprojekt 3",
+                FilePath = "C:\\Prints\\test3.gcode",
+                PrintedAt = DateTime.Now.AddDays(-7),
+                LastModifiedAt = DateTime.Now.AddDays(-2),
+                PrinterUsed = "Ender 3 Pro",
+                FilamentUsed = "PETG - Blau",
+                PrintDurationHours = TimeSpan.FromHours(2),
                 ElectricityPrice = 1.00m
             });
         }
