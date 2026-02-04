@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 
-namespace PrintTracker.Wpf.ViewModel
+namespace PrintTracker.Wpf.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
@@ -35,7 +35,9 @@ namespace PrintTracker.Wpf.ViewModel
                 PrinterUsed = "Prusa i3 MK3S",
                 FilamentUsed = "PLA - Rot",
                 PrintDurationHours = TimeSpan.FromHours(5),
-                ElectricityPrice = 1.50m
+                ElectricityPrice = 1.50m,
+                FilamentPrice = 11.66m,
+                PrintResult = true
             });
 
             PrintProjects.Add(new PrintProject
@@ -47,7 +49,9 @@ namespace PrintTracker.Wpf.ViewModel
                 PrinterUsed = "Ender 3 Pro",
                 FilamentUsed = "PETG - Blau",
                 PrintDurationHours = TimeSpan.FromHours(3.5),
-                ElectricityPrice = 1.00m
+                ElectricityPrice = 1.00m,
+                FilamentPrice = 19.95m,
+                PrintResult = false
             });
 
             PrintProjects.Add(new PrintProject
@@ -59,7 +63,9 @@ namespace PrintTracker.Wpf.ViewModel
                 PrinterUsed = "Ender 3 Pro",
                 FilamentUsed = "PETG - Blau",
                 PrintDurationHours = TimeSpan.FromHours(2),
-                ElectricityPrice = 1.00m
+                ElectricityPrice = 1.00m,
+                FilamentPrice = 24.99m,
+                PrintResult = true
             });
         }
 

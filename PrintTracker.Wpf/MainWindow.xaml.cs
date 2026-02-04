@@ -1,4 +1,4 @@
-﻿using PrintTracker.Wpf.ViewModel;
+﻿using PrintTracker.Wpf.ViewModels;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;

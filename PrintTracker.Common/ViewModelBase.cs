@@ -17,18 +17,17 @@ namespace PrintTracker.Common
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        // Diese Hilfsmethode wird dein bester Freund!
+        // Property-Setter-Methode, die den Wert nur ändert, wenn er sich wirklich ändert
         protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string? propertyName = null)
         {
-            // JOB 1: Prüfen - "Ist der neue Wert überhaupt anders?"
-            // Wenn ich den Namen von "Ben" auf "Ben" ändere, muss ich das UI nicht unnötig nerven.
+            // Prüfen - "Ist der neue Wert überhaupt anders?"
             if (EqualityComparer<T>.Default.Equals(storage, value))
                 return false;
 
-            // JOB 2: Speichern - "Den neuen Wert in die Variable schreiben"
+            // Speichern - "Den neuen Wert in die Variable schreiben"
             storage = value;
 
-            // JOB 3: Benachrichtigen - "Die Klingel drücken"
+            // Benachrichtigen - "Die Klingel drücken"
             OnPropertyChanged(propertyName);
 
             return true; // "Ja, es hat sich wirklich was geändert!"

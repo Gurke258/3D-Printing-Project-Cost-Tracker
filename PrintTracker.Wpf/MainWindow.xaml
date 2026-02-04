@@ -4,15 +4,66 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrintTracker.Wpf"
+        xmlns:viewmodels="clr-namespace:PrintTracker.Wpf.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel, IsDesignTimeCreatable=True}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="3D-Print Project Tracker" Height="450" Width="800">
     <Grid>
-        <StackPanel>
-            <DataGrid ItemsSource="{Binding PrintProjects}" SelectedItem="{Binding SelectedProject}"  AutoGenerateColumns="True" />
-            <Label Content="{Binding SelectedProject.FilePath}"></Label>
-        </StackPanel>
-        
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0" ItemsSource="{Binding PrintProjects}" SelectedItem="{Binding SelectedProject}"  AutoGenerateColumns="false" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Projektname" Binding="{Binding Name}" Width="*" />
+                <DataGridTextColumn Header="Drucker" Binding="{Binding PrinterUsed}" Width="100" />
+                <DataGridTextColumn Header="Filament" Binding="{Binding FilamentUsed}" Width="100" />
+                <DataGridTextColumn Header="Gedruckt am:" Binding="{Binding PrintedAt, StringFormat=dd.MM.yyyy HH:mm}" Width="*" />
+                <DataGridTextColumn Header="Druckergebnis" Binding="{Binding PrintResult}" Width="100" />
+                <!--<DataGridTextColumn Header="Drucker" Binding="{Binding PrinterUsed}" Width="100" />-->
+            </DataGrid.Columns>
+        </DataGrid>
+        <GroupBox Header="Projektdetails" Grid.Row="1" Margin="10">
+            <GroupBox.Style>
+                <Style TargetType="GroupBox">
+                    <!-- Standardmäßig sichtbar -->
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Style.Triggers>
+                        <!-- Wenn SelectedProject NULL ist... -->
+                        <DataTrigger Binding="{Binding SelectedProject}" Value="{x:Null}">
+                            <!-- ...dann setze Visibility auf Collapsed -->
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </GroupBox.Style>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Content="Projektname:" FontWeight="Light"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding SelectedProject.Name}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                    <Label  Grid.Column="0" Grid.Row="1" Content="Pfad:" FontWeight="Light"/>
+                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding SelectedProject.FilePath}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                    <Label  Grid.Column="0" Grid.Row="2" Content="zuletzt geändert:" FontWeight="Light"/>
+                    <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding SelectedProject.LastModifiedAt, StringFormat=dd.MM.yyyy HH:mm}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                    <Label  Grid.Column="0" Grid.Row="3" Content="Druckdauer:" FontWeight="Light"/>
+                    <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding SelectedProject.PrintDurationHours}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                    <Label  Grid.Column="0" Grid.Row="4" Content="Strompreis:" FontWeight="Light"/>
+                    <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding SelectedProject.ElectricityPrice, StringFormat=C, ConverterCulture=de-DE}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                    <Label  Grid.Column="0" Grid.Row="5" Content="Filamentpreis:" FontWeight="Light"/>
+                    <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding SelectedProject.FilamentPrice, StringFormat=C, ConverterCulture=de-DE}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                </Grid>
+        </GroupBox>
     </Grid>
     
 </Window>
