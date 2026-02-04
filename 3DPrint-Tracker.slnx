@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="PrintTracker.Common/PrintTracker.Common.csproj" Id="6468df4b-f5eb-411f-99aa-dc1288ce9e45" />
+  <Project Path="PrintTracker.Core/PrintTracker.Core.csproj" Id="675a7380-dcbf-4245-8dd6-7b7fa55d481a" />
+  <Project Path="PrintTracker.Infrastructure/PrintTracker.Infrastructure.csproj" Id="e875fba5-abbd-4971-8894-659ab5e94cfc" />
+  <Project Path="PrintTracker.Wpf/PrintTracker.Wpf.csproj" Id="fc8d7681-863b-4b2c-b6a5-9f40f6978421" />
+</Solution>
