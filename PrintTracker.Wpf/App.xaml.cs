@@ -1,4 +1,4 @@
-﻿using PrintTracker.Core;
+﻿using PrintTracker.Core.Interfaces;
 using PrintTracker.Infrastructure;
 using PrintTracker.Wpf.ViewModels;
 using PrintTracker.Wpf.Views;

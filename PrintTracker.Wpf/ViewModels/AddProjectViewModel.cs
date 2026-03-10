@@ -1,5 +1,5 @@
 ﻿using PrintTracker.Common;
-using PrintTracker.Core;
+using PrintTracker.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Reflection.Metadata;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PrintTracker.Core
+namespace PrintTracker.Core.Interfaces
 {
     public interface IStorageService
     {

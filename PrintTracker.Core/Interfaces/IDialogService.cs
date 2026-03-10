@@ -1,8 +1,9 @@
-﻿using System;
+﻿using PrintTracker.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace PrintTracker.Core
+namespace PrintTracker.Core.Interfaces
 {
     public interface IDialogService
     {

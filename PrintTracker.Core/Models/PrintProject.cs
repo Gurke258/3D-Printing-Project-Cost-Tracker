@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using PrintTracker.Common;
 
-namespace PrintTracker.Core
+namespace PrintTracker.Core.Models
 {
     public class PrintProject : ViewModelBase
     {
@@ -57,13 +57,51 @@ namespace PrintTracker.Core
             get => _printDurationHours;
             set => SetProperty(ref _printDurationHours, value);
         }
-        public decimal? ElectricityPrice { get; set; } // Stromkosten für den Druck
+
+        private decimal? _electricityPrice;
+        public decimal? ElectricityPrice // // Stromkosten für den Druck
+        {
+            get => _electricityPrice;
+            set
+            {
+                SetProperty(ref _electricityPrice, value);
+                OnPropertyChanged(nameof(TotalCost)); // TotalCost neu berechnen, wenn sich der Strompreis ändert
+            }
+
+
+        }
+
+        private double? _electricityUsedWatt;
+        public double? ElectricityUsedWatt // Stromverbrauch in Watt 
+        {
+            get => _electricityUsedWatt;
+            set
+            {
+                SetProperty(ref _electricityUsedWatt, value);
+                OnPropertyChanged(nameof(TotalCost));
+            }
+        }
 
         private decimal? _filamentPrice;
         public decimal? FilamentPrice // Preis des verwendeten Filaments#
         {
             get => _filamentPrice;
-            set => SetProperty(ref _filamentPrice, value);
+            set
+            {
+                SetProperty(ref _filamentPrice, value);
+                OnPropertyChanged(nameof(TotalCost));
+            }
+        }                 
+
+        private double? _usedFilamentWeight;
+        public double? UsedFilamentWeight // Verwendetes Filamentgewicht in Gramm
+        {
+            get => _usedFilamentWeight;
+            set
+            {
+                SetProperty(ref _usedFilamentWeight, value);
+                OnPropertyChanged(nameof(TotalCost));
+            }
         }
 
         private bool _printResult;
@@ -71,6 +109,20 @@ namespace PrintTracker.Core
         {
             get => _printResult;
             set => SetProperty(ref _printResult, value);
+        }
+
+        public decimal? TotalCost
+        {
+            get
+            {
+                decimal filamentCost = FilamentPrice.HasValue && UsedFilamentWeight.HasValue
+                    ? (decimal)UsedFilamentWeight.Value * FilamentPrice.Value / 1000m // Preis pro Gramm
+                    : 0m;
+                decimal electricityCost = ElectricityPrice.HasValue && ElectricityUsedWatt.HasValue && PrintDurationHours.TotalHours > 0
+                    ? (decimal)ElectricityUsedWatt.Value * (decimal)PrintDurationHours.TotalHours * ElectricityPrice.Value / 1000m // Preis pro kWh
+                    : 0m;
+                return filamentCost + electricityCost;
+            }
         }
         // public List<PrintJob> PrintJobs { get; set; } = new List<PrintJob>();
     }

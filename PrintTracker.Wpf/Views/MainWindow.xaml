@@ -5,9 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PrintTracker.Wpf.Views"
         xmlns:viewmodels="clr-namespace:PrintTracker.Wpf.ViewModels"
+        xmlns:converters="clr-namespace:PrintTracker.Wpf.Converters"
         d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel, IsDesignTimeCreatable=False}"
         mc:Ignorable="d"
         Title="3D-Print Project Tracker" Height="800" Width="1200" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <converters:BoolToSuccessConverter x:Key="BoolToSuccessConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -20,7 +24,7 @@
                 <DataGridTextColumn Header="Drucker" Binding="{Binding PrinterUsed}" Width="100" />
                 <DataGridTextColumn Header="Filament" Binding="{Binding FilamentUsed}" Width="100" />
                 <DataGridTextColumn Header="Gedruckt am:" Binding="{Binding PrintedAt, StringFormat=dd.MM.yyyy HH:mm}" Width="*" />
-                <DataGridTextColumn Header="Druckergebnis" Binding="{Binding PrintResult}" Width="100" />
+                <DataGridTextColumn Header="Druckergebnis" Binding="{Binding PrintResult, Converter={StaticResource BoolToSuccessConverter}}" Width="100" />
                 <!--<DataGridTextColumn Header="Drucker" Binding="{Binding PrinterUsed}" Width="100" />-->
             </DataGrid.Columns>
         </DataGrid>
@@ -50,6 +54,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Label Grid.Column="0" Grid.Row="0" Content="Projektname:" FontWeight="Light"/>
                     <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding SelectedProject.Name}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
@@ -63,7 +68,9 @@
                     <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding SelectedProject.ElectricityPrice, StringFormat=C, ConverterCulture=de-DE}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
                     <Label  Grid.Column="0" Grid.Row="5" Content="Filamentpreis:" FontWeight="Light"/>
                     <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding SelectedProject.FilamentPrice, StringFormat=C, ConverterCulture=de-DE}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
-                </Grid>
+                    <Label  Grid.Column="0" Grid.Row="6" Content="Gesamtkosten:" FontWeight="Light"/>
+                    <TextBlock Grid.Column="1" Grid.Row="6" Text="{Binding SelectedProject.TotalCost, StringFormat=C, ConverterCulture=de-DE}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
+            </Grid>
         </GroupBox>
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="center" Margin="10">
             <Button Content="Neues Projekt hinzufügen" Command="{Binding AddCommand}" Margin="10" Padding="5"/>
