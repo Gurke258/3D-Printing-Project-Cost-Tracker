@@ -8,5 +8,6 @@ namespace PrintTracker.Core.Interfaces
     public interface IDialogService
     {
         PrintProject? ShowAddProjectDialog();
+        PrintProject? ShowDisplayChartDialog(object? parameter);
     }
 }

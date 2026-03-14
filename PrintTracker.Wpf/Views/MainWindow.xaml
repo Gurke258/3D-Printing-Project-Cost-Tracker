@@ -8,13 +8,14 @@
         xmlns:converters="clr-namespace:PrintTracker.Wpf.Converters"
         d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel, IsDesignTimeCreatable=False}"
         mc:Ignorable="d"
-        Title="3D-Print Project Tracker" Height="800" Width="1200" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+        Title="3D-Print Project Tracker" Height="900" Width="1200" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <converters:BoolToSuccessConverter x:Key="BoolToSuccessConverter"/>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -42,40 +43,41 @@
                     </Style.Triggers>
                 </Style>
             </GroupBox.Style>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Label Grid.Column="0" Grid.Row="0" Content="Projektname:" FontWeight="Light"/>
-                    <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding SelectedProject.Name}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
-                    <Label  Grid.Column="0" Grid.Row="1" Content="Pfad:" FontWeight="Light"/>
-                    <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding SelectedProject.FilePath}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
-                    <Label  Grid.Column="0" Grid.Row="2" Content="zuletzt geändert:" FontWeight="Light"/>
-                    <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding SelectedProject.LastModifiedAt, StringFormat=dd.MM.yyyy HH:mm}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
-                    <Label  Grid.Column="0" Grid.Row="3" Content="Druckdauer:" FontWeight="Light"/>
-                    <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding SelectedProject.PrintDurationHours, StringFormat={}{0:hh}:{0:mm}}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
-                    <Label  Grid.Column="0" Grid.Row="4" Content="Strompreis:" FontWeight="Light"/>
-                    <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding SelectedProject.ElectricityPrice, StringFormat=C, ConverterCulture=de-DE}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
-                    <Label  Grid.Column="0" Grid.Row="5" Content="Filamentpreis:" FontWeight="Light"/>
-                    <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding SelectedProject.FilamentPrice, StringFormat=C, ConverterCulture=de-DE}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
-                    <Label  Grid.Column="0" Grid.Row="6" Content="Gesamtkosten:" FontWeight="Light"/>
-                    <TextBlock Grid.Column="1" Grid.Row="6" Text="{Binding SelectedProject.TotalCost, StringFormat=C, ConverterCulture=de-DE}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Content="Projektname:" FontWeight="Light"/>
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding SelectedProject.Name}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                <Label  Grid.Column="0" Grid.Row="1" Content="Pfad:" FontWeight="Light"/>
+                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding SelectedProject.FilePath}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                <Label  Grid.Column="0" Grid.Row="2" Content="zuletzt geändert:" FontWeight="Light"/>
+                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding SelectedProject.LastModifiedAt, StringFormat=dd.MM.yyyy HH:mm}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                <Label  Grid.Column="0" Grid.Row="3" Content="Druckdauer:" FontWeight="Light"/>
+                <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding SelectedProject.PrintDurationHours, StringFormat={}{0:hh}:{0:mm}}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                <Label  Grid.Column="0" Grid.Row="4" Content="Strompreis:" FontWeight="Light"/>
+                <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding SelectedProject.ElectricityPrice, StringFormat=C, ConverterCulture=de-DE}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                <Label  Grid.Column="0" Grid.Row="5" Content="Filamentpreis:" FontWeight="Light"/>
+                <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding SelectedProject.FilamentPrice, StringFormat=C, ConverterCulture=de-DE}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                <Label  Grid.Column="0" Grid.Row="6" Content="Gesamtkosten:" FontWeight="Light"/>
+                <TextBlock Grid.Column="1" Grid.Row="6" Text="{Binding SelectedProject.TotalCost, StringFormat=C, ConverterCulture=de-DE}" FontWeight="Light" Margin="5,0,0,0" VerticalAlignment="Center"/>
             </Grid>
         </GroupBox>
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="center" Margin="10">
             <Button Content="Neues Projekt hinzufügen" Command="{Binding AddCommand}" Margin="10" Padding="5"/>
             <Button Content="Projekt löschen"  Command="{Binding DeleteCommand}" Margin="10"  Padding="5"/>
             <Button Content="Projekt speichern" Command="{Binding SaveCommand}" Margin="10"  Padding="5"/>
+            <Button Content="Chart anzeigen" Command="{Binding DisplayChart}" Margin="10"  Padding="5"/>
         </StackPanel>
     </Grid>
     

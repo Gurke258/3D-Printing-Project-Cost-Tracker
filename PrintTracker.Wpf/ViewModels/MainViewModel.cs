@@ -1,6 +1,10 @@
-﻿using PrintTracker.Common;
+﻿using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using PrintTracker.Common;
 using PrintTracker.Core.Interfaces;
 using PrintTracker.Core.Models;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,6 +20,7 @@ namespace PrintTracker.Wpf.ViewModels
         public ICommand DeleteCommand { get; }
         public ICommand AddCommand { get; }
         public ICommand SaveCommand { get; }
+        public ICommand DisplayChart { get; }
         private readonly IStorageService _storageService;
         private readonly IDialogService _dialogService;
 
@@ -33,6 +38,7 @@ namespace PrintTracker.Wpf.ViewModels
             DeleteCommand = new RelayCommand(DeleteProject, CanDeleteProject);
             AddCommand = new RelayCommand(AddProject);
             SaveCommand = new RelayCommand(SaveProjects);
+            DisplayChart = new RelayCommand(_ => DisplayCharts(PrintProjects));
             _storageService = storageService;
             _dialogService = dialogService;
             LoadProjects();
@@ -44,9 +50,23 @@ namespace PrintTracker.Wpf.ViewModels
             return SelectedProject != null;
         }
 
+        private void DeleteProject(object? parameter)
+        {
+            if (SelectedProject != null)
+            {
+                PrintProjects.Remove(SelectedProject);
+                SelectedProject = null;
+            }
+        }
+
         private void SaveProjects(object? parameter)
         {
             _storageService.SaveData(PrintProjects);
+        }
+
+        private void DisplayCharts(ObservableCollection<PrintProject> PrintProjects)
+        {
+            var displayChart = _dialogService.ShowDisplayChartDialog(PrintProjects);
         }
 
         private void LoadProjects()
@@ -76,15 +96,6 @@ namespace PrintTracker.Wpf.ViewModels
                 PrintProjects.Add(newProject);
             }
 
-        }
-
-        private void DeleteProject(object? parameter)
-        {
-            if (SelectedProject != null)
-            {
-                PrintProjects.Remove(SelectedProject);
-                SelectedProject = null;
-            }
         }
 
         private void LoadTestData()
