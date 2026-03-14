@@ -15,7 +15,7 @@ Dieses Projekt befindet sich in der aktiven Entwicklung. Aktuell ist die **Maste
 *   **Data Binding:** Tiefgehende Nutzung von `ObservableCollection`, `SelectedItems` und komplexen Bindings mit `StringFormat`.
 
 ## 📸 Vorschau
-![App Preview](https://via.placeholder.com/800x450.png?text=Screenshot+kommt+bald)
+![App Preview](assets/preview.png)
 
 ## 🏗 Geplante Features
 - [x] **Data Persistence:** Speichern der Projektdaten in JSON-Dateien oder einer lokalen SQLite-Datenbank.
